@@ -4,8 +4,6 @@
 
 """convert netease music cache file (.uc) to mp3"""
 
-import sys
-
 
 def uc2mp3(file_path):
 	fi = open(file_path, 'rb')
@@ -15,7 +13,7 @@ def uc2mp3(file_path):
 		b = fi.read(1024)
 		if not b:
 			break
-		b = bytes(list(map(lambda a: a ^ 0xa3, [x for x in b])))
+		b = bytes(map(lambda a: a ^ 0xa3, [x for x in b]))
 		fo.write(b)
 
 	fi.close()
@@ -23,4 +21,6 @@ def uc2mp3(file_path):
 
 
 if __name__ == '__main__':
+	import sys
+
 	uc2mp3(sys.argv[1])
