@@ -6,18 +6,15 @@
 
 
 def uc2mp3(file_path):
-	fi = open(file_path, 'rb')
-	fo = open(file_path + '.mp3', 'wb')
 
-	while True:
-		b = fi.read(1024)
-		if not b:
-			break
-		b = bytes(map(lambda a: a ^ 0xa3, [x for x in b]))
-		fo.write(b)
+	with open(file_path, 'rb') as fi, open(file_path + '.mp3', 'wb') as fo:
 
-	fi.close()
-	fo.close()
+		while True:
+			b = fi.read(1024)
+			if not b:
+				break
+			b = bytes(map(lambda a: a ^ 0xa3, [x for x in b]))
+			fo.write(b)
 
 
 if __name__ == '__main__':
